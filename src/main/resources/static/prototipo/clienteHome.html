@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="Author" content="Junio Almeida"/>
+		<meta name="descripton" content="BlueFood, plataforma de comida em delivery"/>
+		<meta name="keywords" content="BlueFood, Comida, Restaurante, Delivery"/>
+		<link rel="stylesheet" type="text/css" href="css/bf_estiloSistema.css"/>
+		<title>BlueFood</title>
+	</head>
+	<body>
+		
+		<header>
+			<div id="div-header">
+				<span class="element-aux-allign-image"></span>
+				<a href="">
+					<img src="images/bf_logotipoSistema.png" class="logotipo"/>
+				</a>
+			</div>	
+
+			<div id="div-header-user">
+				Olá Nome do Usuário!
+
+				<br/>
+
+				<img src="images/bf_iconeCarrinho.png" class="img-shopping-cart"/>
+			</div>
+		</header>
+		<br/><br/>		
+		<!-- Cabeçalho fim -->
+
+		<div>
+			<h1>É hora de rangar!</h1>
+
+			<form method="post" action="">
+				<fieldset>
+					<input type="text" name="search" placeholder="Buscar por..."/>
+					<input type="button" value="Procurar" onClick="location.href='clienteBusca.html';"/>
+				</fieldset>
+			</form>
+		</div>
+
+		<div id="div-food-categories">
+			<div>
+				<a href="#">
+					<img src="images/sys_categoriaChurrasco.png"/>
+					<br/><span>Churrasco</span> 
+				</a>
+			</div>
+
+			<div>
+				<a href="#">
+					<img src="images/sys_categoriaHamburguer.png"/>
+					<br/><span>Hamburguer</span> 
+				</a>
+			</div>
+
+			<div>
+				<a href="#">
+					<img src="images/sys_categoriaPizza.png"/>
+					<br/><span>Pizza</span> 
+				</a>
+			</div>
+
+			<div>
+				<a href="#">
+					<img src="images/sys_categoriaSalada.png"/>
+					<br/><span>Salada</span> 
+				</a>
+			</div>
+
+			<div>
+				<a href="#">
+					<img src="images/sys_categoriaSobremesa.png"/>
+					<br/><span>Sobremesa</span> 
+				</a>
+			</div>
+		</div>
+
+		<div>
+			<h1>Cupons disponíveis</h1>
+			<input type="button" value="10% Hamburguer" onClick="location.href='clienteBusca.html';"/>
+			<br/>
+			<input type="button" value="15% Pizza" onClick="location.href='clienteBusca.html';"/>
+		</div>
+
+		<div>
+			<h1>Últimos pedidos</h1>
+			<input type="button" value="#15124 McBlunalds" onClick="location.href='clientePedido.html';"/>
+			<br/><input type="button" value="#35464 Blue Pizza" onClick="location.href='clientePedido.html';"/>
+			<br/><input type="button" value="#38754 Hard Blue" onClick="location.href='clientePedido.html';"/>
+		</div>
+
+		<div>
+			<h1>Conta</h1>
+			<input type="button" value="Meus dados" onClick="location.href='clienteCadastro.html';"/>
+			<br/>
+			<input type="button" value="Sair" onClick="location.href='index.html';"/>
+		</div>
+
+		<!-- Rodapé início -->
+	</body>
+</html>

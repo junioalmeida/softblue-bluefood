@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="Author" content="Junio Almeida"/>
+		<meta name="descripton" content="BlueFood, plataforma de comida em delivery"/>
+		<meta name="keywords" content="BlueFood, Comida, Restaurante, Delivery"/>
+		<link rel="stylesheet" type="text/css" href="css/bf_estiloSistema.css"/>
+		<title>BlueFood</title>
+	</head>
+	<body>
+		
+		<header>
+			<div id="div-header">
+				<span class="element-aux-allign-image"></span>
+				<a href="">
+					<img src="images/bf_logotipoSistema.png" class="logotipo"/>
+				</a>
+			</div>	
+
+			<div id="div-header-user">
+				Olá Nome do Usuário!
+			</div>
+		</header>
+		<br/><br/>
+		<!-- Cabeçalho fim -->
+
+		<div>
+			<h1>Comidas</h1>
+
+			<div>
+				<span>Pizza de Calabresa</span>
+				<br/><span>Pizzas</span>
+				<br/><span>Massa fina, queijo, calabresa e pimenta.</span>
+				<br/><span>R$ 45,00</span>
+				<br/><input type="button" value="Remover"/>
+			</div>
+
+			<br/>
+
+			<div>
+				<span>Hamburguer</span>
+				<br/><span>Hamburguer</span>
+				<br/><span>Pão, carne 200gr, queijo, tomate e alface.</span>
+				<br/><span>R$ 30,00</span>
+				<br/><input type="button" value="Remover"/>
+			</div>
+
+			<br/>
+
+			<div id="error-message">
+				Eventual mensagem de erro.
+			</div>
+
+			<br/>
+
+			<div>
+				<span>Nova comida:</span>
+
+				<form method="post" action="">
+					<br/><label for="item">Item:</label>
+					<br/><input type="text" id="item" name="item"/>
+
+					<br/><label for="descripton">Descrição:</label>
+					<br/><input type="text" id="descripton" name="descripton"/>
+
+					<br/><label for="price">Preço: </label>
+					<br/><input type="text" id="price" name="price"/>
+
+					<br/><label for="category">Categoria de comida:</label>
+					<br/><input type="text" id="category" name="category"/>
+
+					<br/><label for="spotlight">Destaque:</label>
+					<br/><input type="checkbox" id="spotlight" name="spotlight"/>
+
+					<br/><br/>
+
+					<input type="button" value="Adicionar" onClick="location.href='restauranteComidas.html';"/>
+				</form>
+			</div>
+		</div>
+
+		<br/><br/>
+			
+		<input type="button" value="Voltar" onClick="location.href='restauranteHome.html';"/>
+
+		<!-- Rodapé início -->
+		<br/><br/>
+	</body>
+</html>
