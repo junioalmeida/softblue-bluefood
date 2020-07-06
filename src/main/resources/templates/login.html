@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="Author" content="Junio Almeida"/>
+		<meta name="descripton" content="BlueFood, plataforma de comida em delivery"/>
+		<meta name="keywords" content="BlueFood, Comida, Restaurante, Delivery"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bf_estiloSistema.css}"/>
+		<title>BlueFood</title>
+	</head>
+	<body>
+		<header>
+			<div id="div-header">
+				<span class="element-aux-allign-image"></span>
+				<a href="/">
+					<img th:src="@{/images/bf_logotipoSistema.png}" class="logotipo"/>
+				</a>
+			</div>
+		</header>
+		<br/><br/>
+		<!--Cabeçalho fim-->
+
+		<div>
+			<img th:src="@{/images/bf_iconeUsuario.png}" class="user-icon"/>
+			<h1>Autenticação</h1>
+			<form method="post" action="">
+				<fieldset>
+					<input type="text" name="email" placeholder="E-mail..."/>
+					<input type="password" name="password" placeholder="Senha..."/>	
+					<input type="button" value="Entrar" onClick="location.href='clienteHome.html';"/>
+				</fieldset>
+			</form>
+		</div>
+
+		<br/>
+
+		<div id="error-message">
+			Mensagem de erro...
+		</div>
+
+		<br/>
+
+		<div>
+			<input type="button" value="Gostaria de criar a minha conta de usuário" onClick="location.href='clienteCadastro.html';"/>
+			<br/>
+			<input type="button" value="Gostaria de criar a minha conta de restaurante" onClick="location.href='restauranteCadastro.html';"/>
+		</div>
+
+		<!--Rodapé início-->
+	</body>
+</html>

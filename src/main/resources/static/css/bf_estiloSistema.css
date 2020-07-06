@@ -1,0 +1,204 @@
+* {
+	font-family: Verdana;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#div-header {
+	background-color: #1e9bde;
+	height: 70px;
+}
+
+.element-aux-allign-image {
+
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.logotipo {
+	height: 60%;
+	vertical-align: middle;
+}
+
+.user-icon {
+	width: 100px;
+}
+
+h1{
+	font-size: 20px;
+	color: #1e9bde;
+	text-transform: uppercase;
+	font-style: italic;
+
+	border: 2px solid #1e9bde;
+	border-left-width: 10px;
+	border-right-width: 10px;
+	border-radius: 30px 30px 30px 30px;
+
+	background-color: #eeeeee;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#error-message,
+#success-message {
+	color: #ffffff;
+	width: 400px;
+
+	margin-right: auto;
+	margin-left: auto;
+	padding: 10px;
+
+	border-radius: 10px;
+}
+
+#error-message {
+	background-color: #d40000;
+}
+
+#success-message {
+	background-color: #0baf00;
+}
+
+.input-error {
+	border-color: #ff2828;
+}
+
+fieldset{
+	width: 400px;
+	margin-right: auto;
+	margin-left: auto;
+	border-width: 5px;
+}
+
+#div-header-user {
+	background-color: #7bc2e5;
+	color: #ffffff;
+	line-height: 40px;
+}
+
+.img-shopping-cart {
+  height: 50px;
+}
+
+input,
+select,
+textarea {
+	
+	border: 2px solid #1e9bde;
+	margin-bottom: 6px;
+	height: 35px;
+}
+
+textarea {
+	width: 300px;
+	height: 100px;
+}
+
+input[type=text],
+input[type=password],
+select {
+	font-size: 16px;
+	width: 140px;
+	padding-left: 8px;
+}
+
+
+input[type=button],
+input[type=submit] {
+
+	background-color: #1e9bde;
+	color: #ffffff;
+	text-transform: uppercase;
+	font-weight: bold;
+
+	border: 1px solid #0153b0;
+	border-bottom-width: 3px;
+	border-radius: 5px;
+
+	padding: 5px 8px;
+}
+
+input[type=button]:hover,
+input[type=submit]:hover {
+
+	background-color: #69c5ee;
+	border-color: #1e9bde;
+	cursor: pointer;
+}
+
+table {
+	background-color: #ffffff;
+	font-size: 14px;
+	margin-left: auto;
+	margin-right: auto;
+	border-spacing: 1px;
+}
+
+th {
+	background-color: #1e9bde;
+	color: #ffffff;
+	text-transform: uppercase;
+	padding: 3px;
+}
+
+tr:nth-child(even) {
+	background-color: #cccccc;
+}
+
+tr:nth-child(odd) {
+	background-color: #ffffff;
+}
+
+td {
+	padding: 3px;
+}
+
+#div-food-categories {
+	display: flex;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#div-food-categories div {
+	margin: auto;
+}
+
+a:link,
+a:visited {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#div-option-restaurant img{
+	height: 130px;
+}
+
+.restaurant-name {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#div-filter .filter-selected {
+	background-color: #69c5ee; /*!important*/
+	border-color: #1e9bde; /*!important*/
+}
+
+.img-restaurant-order {
+	height: 300px; 
+}
+
+#div-highlights-option img,
+#div-menu-option img {
+	height:  250px;
+}
