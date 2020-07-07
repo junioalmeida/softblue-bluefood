@@ -102,7 +102,7 @@
 	
 				<br/>
 				
-				<input type="button" value="Voltar" onClick="location.href='index.html';"/>
+				<input type="button" value="Voltar" th:onClick="'location.href=\'' + @{/restaurant/home} + '\';'"/>
 			</div>
 		</div>
 	</body>

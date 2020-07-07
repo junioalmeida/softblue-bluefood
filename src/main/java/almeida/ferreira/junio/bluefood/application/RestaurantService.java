@@ -2,7 +2,10 @@ package almeida.ferreira.junio.bluefood.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import almeida.ferreira.junio.bluefood.domain.custumer.Custumer;
+import almeida.ferreira.junio.bluefood.domain.custumer.CustumerRepository;
 import almeida.ferreira.junio.bluefood.domain.restaurant.Restaurant;
 import almeida.ferreira.junio.bluefood.domain.restaurant.RestaurantRepository;
 
@@ -13,8 +16,12 @@ public class RestaurantService{
 	private RestaurantRepository restaurantRepository;
 	
 	@Autowired
+	private CustumerRepository custumerRepository;
+	
+	@Autowired
 	private ImageService imageService;
 	
+	@Transactional
 	public void save(Restaurant restaurant) throws ValidationException{
 		
 		if(!validateEmail(restaurant.getEmail(), restaurant.getId())) {
@@ -34,6 +41,12 @@ public class RestaurantService{
 	}
 	
 	private boolean validateEmail(String email, Integer id) {
+		
+		Custumer custumer = custumerRepository.findByEmail(email);
+		
+		if(custumer != null) {
+			return false;
+		}
 		
 		Restaurant restaurant = restaurantRepository.findByEmail(email);
 		

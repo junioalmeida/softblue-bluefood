@@ -67,7 +67,6 @@ public class Restaurant extends User {
 			throw new IllegalStateException("O restaurante deve estar salvo no banco de dados.");
 		}
 
-		// TODO Deixar extensão dinâmica
 		this.logotipo = String.format("%04d-logo.%s", 
 									getId(), 
 									FileType.of(logotipoFile.getContentType()));
