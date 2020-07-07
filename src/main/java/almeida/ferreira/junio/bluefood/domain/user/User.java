@@ -30,29 +30,29 @@ public class User implements Serializable {
 	private Integer id;
 	
 	@Column(length = 80, nullable = false)
-	@NotBlank(message = "O nome deve ser preenchido")
-	@Size(max = 80, message = "O nome é muito grande")
+	@NotBlank(message = "O nome deve ser preenchido.")
+	@Size(max = 80, message = "O nome é muito grande.")
 	private String name;
 	
 	@Column(length = 60, nullable = false)
-	@NotBlank(message = "O email deve ser preenchido")
-	@Email(message = "O email não é válido")
-	@Size(max = 60, message = "O email é muito grande")
+	@NotBlank(message = "O email deve ser preenchido.")
+	@Email(message = "O formato do e-mail não é válido.")
+	@Size(max = 60, message = "O email é muito grande.")
 	private String email;
 	
 	@Column(length = 11, nullable = false)
-	@NotBlank(message = "O telefone deve ser preenchido")
-	@Digits(integer = 11, fraction = 0, message = "O telefone não é válido")
+	@NotBlank(message = "O telefone deve ser preenchido.")
+	@Digits(integer = 11, fraction = 0, message = "O formato do telefone não é válido.")
 	private String phone;
 	
 	@Column(length = 8, nullable = false)
-	@NotBlank(message = "O CEP deve ser preenchido")
-	@Digits(integer = 8, fraction = 0, message = "O telefone não é válido")
+	@NotBlank(message = "O CEP deve ser preenchido.")
+	@Digits(integer = 8, fraction = 0, message = "O formato do CEP não é válido.")
 	private String cep;
 	
 	@Column(length = 80, nullable = false)
-	@NotBlank(message = "A Senha deve ser preenchida")
-	@Size(max = 80, message = "A senha é muito grande")
+	@NotBlank(message = "A senha deve ser preenchida.")
+	@Size(max = 80, message = "A senha é muito grande.")
 	private String password;
 	
 	public void encryptPassword() {

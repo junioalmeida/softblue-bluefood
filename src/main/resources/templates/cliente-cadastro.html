@@ -16,7 +16,7 @@
 				<br/>
 	
 				<div>
-					<form method="post" th:object="${custumer}" th:action="${!isEditMode} ? @{/public/custumer/save} : @{/custumer/save}">
+					<form method="POST" th:object="${custumer}" th:action="${!isEditMode} ? @{/public/custumer/save} : @{/custumer/save}">
 						<fieldset>
 							
 							<input type="hidden" th:field="*{id}"/>

@@ -18,8 +18,8 @@ import lombok.Setter;
 public class Custumer extends User {
 
 	@Column(length = 11, nullable = false)
-	@NotBlank(message = "O CPF deve ser informado")
-	@Digits(integer = 11, fraction = 0, message = "O telefone não é válido")
+	@NotBlank(message = "O CPF deve ser informado.")
+	@Digits(integer = 11, fraction = 0, message = "O formato do CPF não é válido.")
 	private String cpf;
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import almeida.ferreira.junio.bluefood.application.CustumerService;
 import almeida.ferreira.junio.bluefood.application.ValidationException;
 import almeida.ferreira.junio.bluefood.domain.custumer.Custumer;
+import almeida.ferreira.junio.bluefood.domain.restaurant.Restaurant;
 
 @Controller
 @RequestMapping(path = "/public")
@@ -28,6 +29,14 @@ public class PublicController {
 		model.addAttribute("custumer", new Custumer());
 		ControllerHelper.saveEditMode(model, false);
 		return "cliente-cadastro";
+	}
+	
+	@GetMapping(path = "/restaurant/new")
+	public String newRestaurant(Model model) {
+		
+		model.addAttribute("restaurant", new Restaurant());
+		ControllerHelper.saveEditMode(model, false);
+		return "restaurante-cadastro";
 	}
 	
 	@PostMapping(path = "/custumer/save")

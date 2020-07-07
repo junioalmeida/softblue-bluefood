@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+	<body>
+		<div layout:fragment="content">
+			<div>
+				<h1>Cadastro de Restaurante</h1>	
+	
+				<div>
+					<form method="POST" th:action="@{/public/restaurant/save}">
+						<fieldset>
+							<label for="name">Nome do Restaurante:</label>
+							<br/><input type="text" id="name" name="name" placeholder="Nome..."/>	
+							<br/><br/>
+	
+							<label for="cnpj">CNPJ:</label>
+							<br/><input type="text" id="cnpj" name="cpnj" placeholder="CNPJ..."/>	
+							<br/><br/>
+	
+							<label for="email">E-mail:</label>
+							<br/><input type="text" id="email" name="email" placeholder="E-mail..."/>	
+							<br/><br/>
+	
+							<label for="phone">Telefone:</label>
+							<br/><input type="text" id="phone" name="phone" placeholder="Telefone..."/>	
+							<br/><br/>
+	
+							<label for="cep">CEP:</label>
+							<br/><input type="text" id="cep" name="cep" placeholder="CEP..."/>	
+							<br/><br/>
+	
+							<label for="category">Categoria de comida:</label>
+							<br/>
+							<select id="category" name="category">
+								<option>Salada</option>	
+								<option>Churrasco</option>	
+								<option>Pizza</option>	
+								<option>Hamburguer</option>	
+							</select>	
+							<br/><br/>
+	
+							<label for="logo">Logotipo:</label>
+							<br/><input type="file" id="logo" name="logo"/>	
+							<br/><br/>
+	
+							<label for="password">Senha:</label>
+							<br/><input type="password" id="password" name="password" placeholder="Senha..."/>	
+							<br/><br/>
+	
+							<div id="error-message">
+								Aqui vai um exemplo de mensagem de erro
+							</div>
+	
+							<br/>
+							
+							<input type="submit" th:value="${!isEditMode} ? Cadastrar : Alterar"/>
+						</fieldset>
+					</form>
+				</div>
+	
+				<br/>
+				
+				<input type="button" value="Voltar" onClick="location.href='index.html';"/>
+			</div>
+		</div>
+	</body>
+</html>
