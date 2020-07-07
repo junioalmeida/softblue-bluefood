@@ -18,6 +18,13 @@ public class CustumerService{
 			throw new ValidationException("O email informado já está sendo utilizado.");
 		}
 		
+		if(custumer.getId() != null) {
+			Custumer custumerDB = custumerRepository.findById(custumer.getId()).orElseThrow();
+			custumer.setPassword(custumerDB.getPassword());
+		} else {
+			custumer.encryptPassword();
+		}
+		
 		custumerRepository.save(custumer);
 	}
 	

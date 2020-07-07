@@ -12,6 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import almeida.ferreira.junio.bluefood.utils.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,4 +54,8 @@ public class User implements Serializable {
 	@NotBlank(message = "A Senha deve ser preenchida")
 	@Size(max = 80, message = "A senha é muito grande")
 	private String password;
+	
+	public void encryptPassword() {
+		this.password = StringUtils.encypt(this.password);
+	}
 }
