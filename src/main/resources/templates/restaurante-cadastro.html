@@ -16,7 +16,7 @@
 				<br/>
 	
 				<div>
-					<form method="POST" th:object="${restaurant}" th:action="${!isEditMode} ? @{/public/restaurant/save} : @{/restaurant/save}" enctype="application/x-www-form-urlencoded">
+					<form method="POST" th:object="${restaurant}" th:action="${!isEditMode} ? @{/public/restaurant/save} : @{/restaurant/save}" enctype="multipart/form-data">
 						<fieldset>
 							<label for="name">Nome do Restaurante:</label>
 							<br/><input type="text" id="name" name="name" placeholder="Nome..." th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'input-error' : ''"/>	
@@ -50,17 +50,25 @@
 								<span th:errors="*{phone}"></span>
 							</div>
 								
-							<label for="cep">CEP:</label>
-							<br/><input type="text" id="cep" name="cep" placeholder="CEP..." th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')} ? 'input-error' : ''"/>	
+							<label for="baseDeliveryRate">Taxa base de entrega:</label>
+							<br/><input type="text" id="baseDeliveryRate" name="baseDeliveryRate" placeholder="Taxa..." th:field="*{baseDeliveryRate}" th:classappend="${#fields.hasErrors('baseDeliveryRate')} ? 'input-error' : ''"/>	
 							<br/><br/>
 
-							<div id="error-message" th:if="${#fields.hasErrors('cep')}">
-								<span th:errors="*{cep}"></span>
+							<div id="error-message" th:if="${#fields.hasErrors('baseDeliveryRate')}">
+								<span th:errors="*{baseDeliveryRate}"></span>
 							</div>
 							
-							<label for="category">Categoria de comida:</label>
+							<label for="deliveryTime">Tempo de entrega (min.):</label>
+							<br/><input type="text" id="deliveryTime" name="deliveryTime" placeholder="Tempo..." th:field="*{deliveryTime}" th:classappend="${#fields.hasErrors('deliveryTime')} ? 'input-error' : ''"/>	
+							<br/><br/>
+
+							<div id="error-message" th:if="${#fields.hasErrors('deliveryTime')}">
+								<span th:errors="*{deliveryTime}"></span>
+							</div>
+							
+							<label for="categories">Categoria de comida:</label>
 							<br/>
-							<select id="category" name="category" multiple="multiple">
+							<select id="categories" name="categories" multiple="multiple" th:field="*{categories}">
 								<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Salada</option>	
 							</select>	
 							<br/><br/>
@@ -69,12 +77,12 @@
 								<span th:errors="*{categories}"></span>
 							</div>
 	
-							<label for="logotipo">Logotipo:</label>
-							<br/><input type="file" id="logotipo" name="logotipo" th:field="*{logotipo}" th:classappend="${#fields.hasErrors('logotipo')} ? 'input-error' : ''"/>	
+							<label for="logotipoFile">Logotipo:</label>
+							<br/><input type="file" id="logotipoFile" name="logotipoFile" th:field="*{logotipoFile}" th:classappend="${#fields.hasErrors('logotipoFile')} ? 'input-error' : ''"/>	
 							<br/><br/>
 							
-							<div id="error-message" th:if="${#fields.hasErrors('logotipo')}">
-								<span th:errors="*{logotipo}"></span>
+							<div id="error-message" th:if="${#fields.hasErrors('logotipoFile')}">
+								<span th:errors="*{logotipoFile}"></span>
 							</div>
 	
 							<label for="password">Senha:</label>

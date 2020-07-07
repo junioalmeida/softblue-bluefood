@@ -16,10 +16,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import almeida.ferreira.junio.bluefood.domain.user.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @SuppressWarnings("serial")
 @Getter
@@ -33,10 +36,10 @@ public class Restaurant extends User {
 	@Digits(integer = 14, fraction = 0, message = "O formato do CNPJ não é válido.")
 	private String cnpj;
 	
-	@Column(length = 80, nullable = false)
-	@NotBlank(message = "A logotipo deve ser informado.")
 	@Size(max = 80)
 	private String logotipo;
+	
+	private transient MultipartFile logotipoFile;
 
 	@Column(length = 80, nullable = false)
 	@NotNull(message = "A taxa básica de entrega deve ser informado.")
@@ -57,5 +60,15 @@ public class Restaurant extends User {
 			inverseJoinColumns = @JoinColumn(name = "category_id")
 	)
 	@Size(min = 1, message = "Ao menos uma categoria deve ser selecionada.")
+	@ToString.Exclude
 	private Set<RestaurantCategory> categories = new HashSet<>(0);
+	
+	public void setLogotipoFileName() {
+		if(getId() == null) {
+			throw new IllegalStateException("O restaurante deve estar salvo no banco de dados.");
+		}
+		
+		//TODO Deixar extensão dinâmica
+		this.logotipo = String.format("%04d-logo.%s", getId(), "png");
+	}
 }

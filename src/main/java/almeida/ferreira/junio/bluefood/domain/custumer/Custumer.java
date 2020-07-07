@@ -21,5 +21,10 @@ public class Custumer extends User {
 	@NotBlank(message = "O CPF deve ser informado.")
 	@Digits(integer = 11, fraction = 0, message = "O formato do CPF não é válido.")
 	private String cpf;
+	
+	@Column(length = 8, nullable = false)
+	@NotBlank(message = "O CEP deve ser preenchido.")
+	@Digits(integer = 8, fraction = 0, message = "O formato do CEP não é válido.")
+	private String cep;
 
 }

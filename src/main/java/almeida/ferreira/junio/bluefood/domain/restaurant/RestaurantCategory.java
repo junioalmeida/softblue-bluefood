@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @SuppressWarnings("serial")
 @Getter
@@ -39,5 +40,6 @@ public class RestaurantCategory implements Serializable {
 	private String image;
 	
 	@ManyToMany(mappedBy = "categories")
+	@ToString.Exclude
 	private Set<Restaurant> restaurants = new HashSet<>(0);
 }

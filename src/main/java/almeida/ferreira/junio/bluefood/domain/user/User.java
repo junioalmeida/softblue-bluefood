@@ -45,11 +45,6 @@ public class User implements Serializable {
 	@Digits(integer = 11, fraction = 0, message = "O formato do telefone não é válido.")
 	private String phone;
 	
-	@Column(length = 8, nullable = false)
-	@NotBlank(message = "O CEP deve ser preenchido.")
-	@Digits(integer = 8, fraction = 0, message = "O formato do CEP não é válido.")
-	private String cep;
-	
 	@Column(length = 80, nullable = false)
 	@NotBlank(message = "A senha deve ser preenchida.")
 	@Size(max = 80, message = "A senha é muito grande.")

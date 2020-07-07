@@ -25,7 +25,10 @@ public class RestaurantService{
 			restaurant.encryptPassword();
 		}
 		
-		restaurantRepository.save(restaurant);
+		Restaurant restaurantDB = restaurantRepository.save(restaurant);
+		restaurantDB.setLogotipoFileName();
+		//TODO Fazer o Upload
+		
 	}
 	
 	private boolean validateEmail(String email, Integer id) {
