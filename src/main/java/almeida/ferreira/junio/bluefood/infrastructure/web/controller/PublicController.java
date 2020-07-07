@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import almeida.ferreira.junio.bluefood.application.CustumerService;
+import almeida.ferreira.junio.bluefood.application.ValidationException;
 import almeida.ferreira.junio.bluefood.domain.custumer.Custumer;
 
 @Controller
@@ -32,12 +33,16 @@ public class PublicController {
 	@PostMapping(path = "/custumer/save")
 	public String saveCustumer(
 			@ModelAttribute(name = "custumer") @Valid Custumer custumer,
-			Errors erros,
+			Errors errors,
 			Model model) {
 		
-		if(!erros.hasErrors()) {
-			custumerService.save(custumer);
-			model.addAttribute("msg", "Cliente cadastrado com sucesso!");
+		if(!errors.hasErrors()) {
+			try {
+				custumerService.save(custumer);
+				model.addAttribute("msg", "Cliente cadastrado com sucesso!");
+			} catch (ValidationException e) {
+				errors.rejectValue("email", null, e.getMessage());
+			}
 		}
 		
 		ControllerHelper.saveEditMode(model, false);
