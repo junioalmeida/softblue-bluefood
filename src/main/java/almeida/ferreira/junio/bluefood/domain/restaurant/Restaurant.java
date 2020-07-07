@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import almeida.ferreira.junio.bluefood.domain.user.User;
+import almeida.ferreira.junio.bluefood.infrastructure.web.validator.UploadConstraint;
 import almeida.ferreira.junio.bluefood.utils.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,6 +41,7 @@ public class Restaurant extends User {
 	@Size(max = 80)
 	private String logotipo;
 
+	@UploadConstraint(acceptedFileTypes = {FileType.PNG}, message = "A imagem não está em um formato válido.")
 	private transient MultipartFile logotipoFile;
 
 	@Column(length = 80, nullable = false)

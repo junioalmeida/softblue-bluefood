@@ -16,7 +16,7 @@ public enum FileType {
 		this.extention = extention;
 	}
 	
-	private boolean sameOf(String mimeType) {
+	public boolean sameOf(String mimeType) {
 		return this.mimeType.equalsIgnoreCase(mimeType);
 	}
 	

@@ -10,10 +10,10 @@ import almeida.ferreira.junio.bluefood.domain.restaurant.RestaurantRepository;
 public class RestaurantService{
 	
 	@Autowired
-	RestaurantRepository restaurantRepository;
+	private RestaurantRepository restaurantRepository;
 	
 	@Autowired
-	ImageService imageService;
+	private ImageService imageService;
 	
 	public void save(Restaurant restaurant) throws ValidationException{
 		

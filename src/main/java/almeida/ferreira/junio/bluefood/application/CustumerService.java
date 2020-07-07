@@ -10,7 +10,7 @@ import almeida.ferreira.junio.bluefood.domain.custumer.CustumerRepository;
 public class CustumerService{
 	
 	@Autowired
-	CustumerRepository custumerRepository;
+	private CustumerRepository custumerRepository;
 	
 	public void save(Custumer custumer) throws ValidationException{
 		
