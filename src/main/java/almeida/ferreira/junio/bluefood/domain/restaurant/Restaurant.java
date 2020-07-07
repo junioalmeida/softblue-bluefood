@@ -26,7 +26,7 @@ public class Restaurant extends User{
 	@Column(length = 14, nullable = false)
 	@NotBlank(message = "O CNPJ deve ser informado.")
 	@Digits(integer = 14, fraction = 0, message = "O formato do CNPJ não é válido.")
-	private String CNPJ;
+	private String cnpj;
 	
 	@Column(length = 80, nullable = false)
 	@NotBlank(message = "A logotipo deve ser informado.")
@@ -44,5 +44,4 @@ public class Restaurant extends User{
 	@Min(value = 0, message = "O tempo de entrega não pode ser negativa.")
 	@Max(value = 120, message = "O tempo de entrega deve ser menor que 120 minutos.")
 	private Integer deliveryTime;
-
 }
