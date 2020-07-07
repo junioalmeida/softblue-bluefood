@@ -7,9 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.EqualsAndHashCode;
@@ -41,12 +41,12 @@ public class User implements Serializable {
 	
 	@Column(length = 11, nullable = false)
 	@NotBlank(message = "O telefone deve ser preenchido")
-	@Pattern(regexp = "[0-9]{10,11}", message = "O telefone não é válido")
+	@Digits(integer = 11, fraction = 0, message = "O telefone não é válido")
 	private String phone;
 	
 	@Column(length = 8, nullable = false)
 	@NotBlank(message = "O CEP deve ser preenchido")
-	@Pattern(regexp = "[0-9]{8}", message = "O CEP não é válido")
+	@Digits(integer = 8, fraction = 0, message = "O telefone não é válido")
 	private String cep;
 	
 	@Column(length = 80, nullable = false)
