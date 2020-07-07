@@ -56,5 +56,6 @@ public class Restaurant extends User {
 			joinColumns = @JoinColumn(name = "restaurant_id"), 
 			inverseJoinColumns = @JoinColumn(name = "category_id")
 	)
+	@Size(min = 1, message = "Ao menos uma categoria deve ser selecionada.")
 	private Set<RestaurantCategory> categories = new HashSet<>(0);
 }

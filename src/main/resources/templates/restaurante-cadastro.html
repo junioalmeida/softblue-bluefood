@@ -16,7 +16,7 @@
 				<br/>
 	
 				<div>
-					<form method="POST" th:object="${restaurant}" th:action="@{/public/restaurant/save}">
+					<form method="POST" th:object="${restaurant}" th:action="${!isEditMode} ? @{/public/restaurant/save} : @{/restaurant/save}" enctype="application/x-www-form-urlencoded">
 						<fieldset>
 							<label for="name">Nome do Restaurante:</label>
 							<br/><input type="text" id="name" name="name" placeholder="Nome..." th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'input-error' : ''"/>	
@@ -60,13 +60,14 @@
 							
 							<label for="category">Categoria de comida:</label>
 							<br/>
-							<select id="category" name="category">
-								<option>Salada</option>	
-								<option>Churrasco</option>	
-								<option>Pizza</option>	
-								<option>Hamburguer</option>	
+							<select id="category" name="category" multiple="multiple">
+								<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Salada</option>	
 							</select>	
 							<br/><br/>
+							
+							<div id="error-message" th:if="${#fields.hasErrors('categories')}">
+								<span th:errors="*{categories}"></span>
+							</div>
 	
 							<label for="logotipo">Logotipo:</label>
 							<br/><input type="file" id="logotipo" name="logotipo" th:field="*{logotipo}" th:classappend="${#fields.hasErrors('logotipo')} ? 'input-error' : ''"/>	

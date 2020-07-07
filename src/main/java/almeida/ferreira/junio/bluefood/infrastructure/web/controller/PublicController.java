@@ -16,6 +16,7 @@ import almeida.ferreira.junio.bluefood.application.RestaurantService;
 import almeida.ferreira.junio.bluefood.application.ValidationException;
 import almeida.ferreira.junio.bluefood.domain.custumer.Custumer;
 import almeida.ferreira.junio.bluefood.domain.restaurant.Restaurant;
+import almeida.ferreira.junio.bluefood.domain.restaurant.RestaurantCategoryRepository;
 
 @Controller
 @RequestMapping(path = "/public")
@@ -26,6 +27,9 @@ public class PublicController {
 	
 	@Autowired
 	RestaurantService restaurantService;
+	
+	@Autowired
+	RestaurantCategoryRepository categoryRepository;
 	
 	@GetMapping(path = "/custumer/new")
 	public String newCustumer(Model model) {
@@ -59,7 +63,10 @@ public class PublicController {
 	public String newRestaurant(Model model) {
 		
 		model.addAttribute("restaurant", new Restaurant());
+		
 		ControllerHelper.saveEditMode(model, false);
+		ControllerHelper.addCategoriesToRegistry(categoryRepository, model);
+		
 		return "restaurante-cadastro";
 	}
 	
@@ -79,6 +86,7 @@ public class PublicController {
 		}
 		
 		ControllerHelper.saveEditMode(model, false);
+		ControllerHelper.addCategoriesToRegistry(categoryRepository, model);
 		
 		return "restaurante-cadastro";
 	}

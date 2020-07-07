@@ -92,10 +92,16 @@ fieldset{
 input,
 select,
 textarea {
-	
 	border: 2px solid #1e9bde;
 	margin-bottom: 6px;
+}
+
+input {
 	height: 35px;
+}
+
+select {
+	height: 100px;
 }
 
 textarea {
@@ -133,6 +139,11 @@ input[type=submit]:hover {
 	background-color: #69c5ee;
 	border-color: #1e9bde;
 	cursor: pointer;
+}
+
+label {
+	display: inline-block;
+	margin-bottom: 5px;
 }
 
 table {
