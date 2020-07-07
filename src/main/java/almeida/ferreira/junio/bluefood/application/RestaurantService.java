@@ -12,6 +12,9 @@ public class RestaurantService{
 	@Autowired
 	RestaurantRepository restaurantRepository;
 	
+	@Autowired
+	ImageService imageService;
+	
 	public void save(Restaurant restaurant) throws ValidationException{
 		
 		if(!validateEmail(restaurant.getEmail(), restaurant.getId())) {
@@ -27,8 +30,7 @@ public class RestaurantService{
 		
 		Restaurant restaurantDB = restaurantRepository.save(restaurant);
 		restaurantDB.setLogotipoFileName();
-		//TODO Fazer o Upload
-		
+		imageService.uploadFile(restaurantDB.getLogotipoFile(), restaurantDB.getLogotipo());
 	}
 	
 	private boolean validateEmail(String email, Integer id) {

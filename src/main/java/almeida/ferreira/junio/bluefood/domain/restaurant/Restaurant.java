@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import almeida.ferreira.junio.bluefood.domain.user.User;
+import almeida.ferreira.junio.bluefood.utils.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,10 +36,10 @@ public class Restaurant extends User {
 	@NotBlank(message = "O CNPJ deve ser informado.")
 	@Digits(integer = 14, fraction = 0, message = "O formato do CNPJ não é válido.")
 	private String cnpj;
-	
+
 	@Size(max = 80)
 	private String logotipo;
-	
+
 	private transient MultipartFile logotipoFile;
 
 	@Column(length = 80, nullable = false)
@@ -54,21 +55,19 @@ public class Restaurant extends User {
 	private Integer deliveryTime;
 
 	@ManyToMany
-	@JoinTable(
-			name = "restaurant_has_category", 
-			joinColumns = @JoinColumn(name = "restaurant_id"), 
-			inverseJoinColumns = @JoinColumn(name = "category_id")
-	)
+	@JoinTable(name = "restaurant_has_category", joinColumns = @JoinColumn(name = "restaurant_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	@Size(min = 1, message = "Ao menos uma categoria deve ser selecionada.")
 	@ToString.Exclude
 	private Set<RestaurantCategory> categories = new HashSet<>(0);
-	
+
 	public void setLogotipoFileName() {
-		if(getId() == null) {
+		if (getId() == null) {
 			throw new IllegalStateException("O restaurante deve estar salvo no banco de dados.");
 		}
-		
-		//TODO Deixar extensão dinâmica
-		this.logotipo = String.format("%04d-logo.%s", getId(), "png");
+
+		// TODO Deixar extensão dinâmica
+		this.logotipo = String.format("%04d-logo.%s", 
+									getId(), 
+									FileType.of(logotipoFile.getContentType()));
 	}
 }
