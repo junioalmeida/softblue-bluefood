@@ -58,12 +58,12 @@
 								<span th:errors="*{baseDeliveryRate}"></span>
 							</div>
 							
-							<label for="deliveryTime">Tempo de entrega (min.):</label>
-							<br/><input type="text" id="deliveryTime" name="deliveryTime" placeholder="Tempo..." th:field="*{deliveryTime}" th:classappend="${#fields.hasErrors('deliveryTime')} ? 'input-error' : ''"/>	
+							<label for="baseDeliveryTime">Tempo de entrega (min.):</label>
+							<br/><input type="text" id="baseDeliveryTime" name="baseDeliveryTime" placeholder="Tempo..." th:field="*{baseDeliveryTime}" th:classappend="${#fields.hasErrors('baseDeliveryTime')} ? 'input-error' : ''"/>	
 							<br/><br/>
 
-							<div id="error-message" th:if="${#fields.hasErrors('deliveryTime')}">
-								<span th:errors="*{deliveryTime}"></span>
+							<div id="error-message" th:if="${#fields.hasErrors('baseDeliveryTime')}">
+								<span th:errors="*{baseDeliveryTime}"></span>
 							</div>
 							
 							<label for="categories">Categoria de comida:</label>

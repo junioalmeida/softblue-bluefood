@@ -51,6 +51,6 @@ public class User implements Serializable {
 	private String password;
 	
 	public void encryptPassword() {
-		this.password = StringUtils.encypt(this.password);
+		this.password = StringUtils.encrypt(this.password);
 	}
 }

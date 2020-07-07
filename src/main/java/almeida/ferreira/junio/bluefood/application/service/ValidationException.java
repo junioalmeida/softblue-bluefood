@@ -1,4 +1,4 @@
-package almeida.ferreira.junio.bluefood.application;
+package almeida.ferreira.junio.bluefood.application.service;
 
 @SuppressWarnings("serial")
 public class ValidationException extends Exception{

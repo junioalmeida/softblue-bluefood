@@ -54,7 +54,7 @@ public class Restaurant extends User {
 	@NotNull(message = "O tempo de entrega deve ser informado.")
 	@Min(value = 0, message = "O tempo de entrega não pode ser negativa.")
 	@Max(value = 120, message = "O tempo de entrega deve ser menor que 120 minutos.")
-	private Integer deliveryTime;
+	private Integer baseDeliveryTime;
 
 	@ManyToMany
 	@JoinTable(name = "restaurant_has_category", joinColumns = @JoinColumn(name = "restaurant_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))

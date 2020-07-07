@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import almeida.ferreira.junio.bluefood.application.CustumerService;
-import almeida.ferreira.junio.bluefood.application.RestaurantService;
-import almeida.ferreira.junio.bluefood.application.ValidationException;
+import almeida.ferreira.junio.bluefood.application.service.CustumerService;
+import almeida.ferreira.junio.bluefood.application.service.RestaurantService;
+import almeida.ferreira.junio.bluefood.application.service.ValidationException;
 import almeida.ferreira.junio.bluefood.domain.custumer.Custumer;
 import almeida.ferreira.junio.bluefood.domain.restaurant.Restaurant;
 import almeida.ferreira.junio.bluefood.domain.restaurant.RestaurantCategoryRepository;

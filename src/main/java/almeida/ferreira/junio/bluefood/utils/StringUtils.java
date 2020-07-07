@@ -10,7 +10,7 @@ public class StringUtils {
 		return str.trim().length() == 0;
 	}
 	
-	public static String encypt(String rawString) {
+	public static String encrypt(String rawString) {
 		//PasswordEncoder enconder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		//return enconder.encode(rawString);
 		
