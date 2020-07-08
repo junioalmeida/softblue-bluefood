@@ -8,20 +8,22 @@
 		<div layout:fragment="content">
 			<div>
 				<img th:src="@{/images/bf_iconeUsuario.png}" class="user-icon"/>
+				
 				<h1>Autenticação</h1>
-				<form method="post" action="">
+				
+				<form method="POST" th:action="@{/login}">
 					<fieldset>
-						<input type="text" name="email" placeholder="E-mail..."/>
+						<input type="text" name="username" placeholder="E-mail..."/>
 						<input type="password" name="password" placeholder="Senha..."/>	
-						<input type="button" value="Entrar" onClick="location.href='clienteHome.html';"/>
+						<input type="submit" value="Entrar"/>
 					</fieldset>
 				</form>
 			</div>
 	
 			<br/>
 	
-			<div id="error-message">
-				Mensagem de erro...
+			<div id="error-message" th:if="${msg != null}">
+				<span th:text="${msg}"></span>
 			</div>
 	
 			<br/>
