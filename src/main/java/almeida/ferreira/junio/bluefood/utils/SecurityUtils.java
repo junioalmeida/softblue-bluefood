@@ -6,7 +6,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import almeida.ferreira.junio.bluefood.domain.custumer.Custumer;
 import almeida.ferreira.junio.bluefood.domain.restaurant.Restaurant;
-import almeida.ferreira.junio.bluefood.domain.user.User;
 import almeida.ferreira.junio.bluefood.infrastructure.web.security.LoggedUser;
 
 public class SecurityUtils {
@@ -24,31 +23,31 @@ public class SecurityUtils {
 	
 	public static Custumer getLoggedCustumer() {
 		
-		User user = getLoggedUser().getUser();
+		LoggedUser loggedUser = getLoggedUser();
 		
-		if(user == null) {
+		if(loggedUser == null) {
 			throw new IllegalStateException("Não existe nenhum usuário logado.");
 		}
 		
-		if(!(user instanceof Custumer)) {
+		if(!(loggedUser.getUser() instanceof Custumer)) {
 			throw new IllegalStateException("O usuário logado não é um cliente");
 		}
 		
-		return (Custumer) user;
+		return (Custumer) loggedUser.getUser();
 	}
 	
 	public static Restaurant getLoggedRestaurant() {
 		
-		User user = getLoggedUser().getUser();
+		LoggedUser loggedUser = getLoggedUser();
 		
-		if(user == null) {
+		if(loggedUser == null) {
 			throw new IllegalStateException("Não existe nenhum usuário logado.");
 		}
 		
-		if(!(user instanceof Restaurant)) {
+		if(!(loggedUser.getUser() instanceof Restaurant)) {
 			throw new IllegalStateException("O usuário logado não é um cliente");
 		}
 		
-		return (Restaurant) user;
+		return (Restaurant) loggedUser.getUser();
 	}
 }

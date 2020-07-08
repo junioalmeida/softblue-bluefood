@@ -14,7 +14,7 @@ public class LoginController {
 
 	@GetMapping(path = "/login-error")
 	public String loginError(Model model) {
-		model.addAttribute("msg", "Usuário ou senha está incorreto.");
+		model.addAttribute("msg", "Usuário ou senha incorreto.");
 		return "login";
 	}
 }
