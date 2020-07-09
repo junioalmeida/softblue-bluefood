@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurant/home}">
+
+	<body>
+		<div layout:fragment="content">
+		
+			
+
+			<div>
+				<h1>PEDIDO</h1>
+				
+				<div id="success-message" th:if="${msg} != null">
+					<span th:text="${msg}"></span>
+				</div>
+			
+				<form method="POST" th:action="@{/restaurant/order/next-status}">
+					<input type="hidden" name="orderId" th:value="${order.id}"/>
+					<input type="submit" th:value="'Status: ' + ${order.getNextStatus().description}" th:disable="${order.status.last}"/>
+				</form>
+			</div>
+			
+			<br/><br/>
+	
+			<div>
+				<span class="text-bold-upper">Data:</span>
+				<br/><span th:text="${#temporals.format(order.date, 'dd/MM/yyyy HH:mm')}"></span>
+			</div>
+			
+			<br/><br/>
+	
+			<div>
+				<span class="text-bold-upper" th:text="${order.custumer.name}"></span>
+				<br/><span th:text="'CEP: ' + ${order.custumer.formattedCep}"></span>
+			</div>
+	
+			<br/><br/>
+	
+			<div th:each="item : ${order.itens}">
+				<span th:text="${item.item.name}"></span>
+				<br/><span th:text="'Qtde: ' + ${item.amount}"></span>
+				<br/><span th:if="${item.notes != null}" th:text="${item.notes}"></span>
+				<br/><span th:text="${#numbers.formatCurrency(item.price)}"></span>
+				<br/><br/>
+			</div>
+			
+			<div>
+				<span class="text-bold-upper">Taxa de entrega</span>
+				<br/><span th:text="${#numbers.formatCurrency(order.deliveryRate)}"></span>
+			</div>
+	
+			<br/><br/>
+	
+			<div>
+				<span class="text-bold-upper">Total</span>
+				<br/><span th:text="${#numbers.formatCurrency(order.total)}"></span>
+			</div>
+	
+			<br/><br/>
+	
+			<input type="button" value="Voltar" th:onClick="'location.href=\'' + @{/restaurant/home} + '\';'"/>
+		</div>
+	</body>
+</html>

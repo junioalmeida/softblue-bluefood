@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/custumer/home}">
+
+	<body>
+		<div layout:fragment="content">
+
+			<div>
+				<img th:src="@{/images/logotipo/} + ${restaurant.logotipo}" class="img-restaurant-order"/>
+				<br/><span th:text="${restaurant.name}" class="text-bold-upper"></span>
+				<br/><span th:text="${restaurant.CategoriesAsString}">Categoria de Comida</span>
+				<br/><span th:text="'Tempo médio de entrega: ' + ${restaurant.calculateDeliveryTime(cep)} + 'm'"></span>
+				<br/><span th:text="'Taxa de entrega: ' + ${#numbers.formatCurrency(restaurant.deliveryRate)}"></span>
+			</div>
+	
+			<div id="div-filter">
+				<h1>Opções</h1>
+				<form method="GET" th:action="@{/custumer/restaurant}">
+					<fieldset>
+						<legend>Filtros</legend>
+						<input type="hidden" name="restaurantId" th:value="${restaurant.id}"/>
+						<th:block th:each="category : ${categories}">
+							<input type="submit" name="category" th:value="${category}" th:classappend="${category} == ${selectedCategory} ? 'filter-selected' : ''"/>
+						</th:block>
+					</fieldset>
+				</form>
+			</div>
+	
+			<br/>
+	
+			<div>
+				<h1>Destaques</h1>
+			</div>
+			
+			<span th:if="${itensSpotlight.size()} == 0">Não existem itens em destaque.</span>
+	
+			<div id="div-highlights-option" th:each="itemSpotlight : ${itensSpotlight}">
+				<img th:src="@{/images/food/} + ${itemSpotlight.image}"/>
+				<br/><span th:text="${itemSpotlight.name}"></span>
+				<br/><span th:text="${itemSpotlight.description}"></span>
+				<br/><span th:text="${#numbers.formatCurrency(itemSpotlight.price)}"></span>
+	
+				<form method="GET" th:action="@{/custumer/shopping-cart/add}">
+					<input type="hidden" name="itemId" th:value="${itemSpotlight.id}"/>
+					<br/><label for="amount">Quantidade:</label>
+					<br/>
+					<select id="amount" name="amount">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select>
+	
+					<br/><br/>
+	
+					<label for="notes">Observações:</label>
+					<br/>
+					<textarea id="notes" name="notes"></textarea>
+	
+					<br/><br/>
+	
+					<input type="submit" value="Adicionar ao carrinho"/>
+				</form>
+				
+				<br/><br/>
+			</div>
+	
+			<div>
+				<h1>Menu</h1>
+			</div>
+	
+			<div id="div-menu-option" th:each="itemNotSpotlight : ${itensNotSpotlight}">
+				<img th:src="@{/images/food/} + ${itemNotSpotlight.image}"/>
+				<br/><span th:text="${itemNotSpotlight.name}"></span>
+				<br/><span th:text="${itemNotSpotlight.description}"></span>
+				<br/><span th:text="${#numbers.formatCurrency(itemNotSpotlight.price)}"></span>
+	
+				<br/>
+	
+				<form method="GET" th:action="@{/custumer/shopping-cart/add}">
+					<input type="hidden" name="itemId" th:value="${itemNotSpotlight.id}"/>
+					<br/><label for="amount">Quantidade:</label>
+					<br/>
+					<select id="amount" name="amount">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select>
+	
+					<br/><br/>
+	
+					<label for="notes">Observações:</label>
+					<br/>
+					<textarea id="notes" name="notes"></textarea>
+	
+					<br/><br/>
+	
+					<input type="submit" value="Adicionar ao carrinho"/>
+				</form>
+				<br/><br/>
+			</div>
+	
+			<input type="button" value="Voltar" th:onClick="'location.href=\'' + @{/custumer/home} + '\';'"/>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/custumer/home}">
+
+	<body>
+		<div layout:fragment="content">
+			
+			<form method="GET" id="searchForm" th:object="${searchFilter}" th:action="@{/custumer/search}">
+				
+				<input type="hidden" id="searchType" th:field="*{searchType}"/>	
+				<input type="hidden" id="categoryId" th:field="*{categoryId}"/>	
+			
+				<div>
+					<h1>É hora de rangar!</h1>
+					<fieldset>
+						<input type="text" name="search" placeholder="Buscar por..." th:field="*{text}"/>
+						<input type="button" value="Procurar" onClick="submitTypeFilter(null)"/>
+					</fieldset>
+				</div>
+				
+				<br/><br/>
+		
+				<div id="div-food-categories">
+					<div th:each="category : ${categories}">
+						<a href="#" th:onClick="'submitTypeFilter(' + ${category.id} + ');'">
+							<img th:src="@{/images/category/} + ${category.image}"/>
+							<br/><span th:text="${category.name}"></span> 
+						</a>
+					</div>
+				</div>
+			</form>
+	
+			<div>
+				<h1>Cupons disponíveis</h1>
+				<input type="button" value="10% Hamburguer" onClick="location.href='clienteBusca.html';"/>
+				<br/>
+				<input type="button" value="15% Pizza" onClick="location.href='clienteBusca.html';"/>
+			</div>
+	
+			<div>
+				<h1>Últimos pedidos</h1>
+				<th:block th:each="order : ${orders}">
+					<input type="button" th:value="${order}" th:onClick="'location.href=\'' + @{/custumer/order/view} + '?orderId=' + ${order.id} +'\';'"/><br/>
+				</th:block>
+			</div>
+			
+			<span th:if="${orders.size() == 0}">Não existe nenhum pedido anterior.</span>
+			
+			<br/><br/>
+	
+			<div>
+				<h1>Conta</h1>
+				<input type="button" value="Meus dados" th:onClick="'location.href=\'' + @{/custumer/edit} + '\';'"/>
+				<br/>
+				<input type="button" value="Sair" th:onClick="'location.href=\'' + @{/logout} + '\';'"/>
+			</div>
+		</div>
+	</body>
+</html>

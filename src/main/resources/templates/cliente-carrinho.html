@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/custumer/home}">
+
+	<body>
+		<div layout:fragment="content">
+
+			<div>
+				<h1>SEU PEDIDO</h1>
+				<img th:if="${!shoppingCart.isEmpty()}" th:src="@{/images/logotipo/} + ${shoppingCart.restaurant.logotipo}" class="img-restaurant-order"/>
+			</div>
+			
+			<div id="error-message" th:if="${msg != null}">
+				<span th:text="${msg}"></span>
+			</div>
+	
+			<br/><br/>
+			
+			<div th:each="itemOrder : ${shoppingCart.itens}">
+				<span class="text-bold-upper" th:text="${itemOrder.item.name}"></span>
+				<br/><span th:text="'Qtde: ' + ${itemOrder.amount}"></span>
+				<br/><span th:if="${itemOrder.notes != null}" th:text="'Obs.: ' + ${itemOrder.notes}"></span>
+				<br/><span th:text="${#numbers.formatCurrency(itemOrder.price)}"></span>
+				<br/><br/>
+				<input type="button" value="Remover" th:onClick="'location.href=\'' + @{/custumer/shopping-cart/remove} + '?itemId=' + ${itemOrder.item.id} + '\';'"/>
+				<br/><br/>
+			</div>
+			
+			<div id="error-message" th:if="${shoppingCart.isEmpty()}">
+				<span>O carrinho está vazio.</span>
+			</div>
+			
+			<div th:if="${!shoppingCart.isEmpty()}">
+				<div>
+					<span>Taxa de entrega</span>
+					<br/><span th:text="${#numbers.formatCurrency(shoppingCart.restaurant.deliveryRate)}"></span>
+				</div>
+		
+				<br/><br/>
+		
+				<div>
+					<span>Total</span>
+					<br/><span th:text="${#numbers.formatCurrency(shoppingCart.calculateCart(true))}"></span>
+				</div>
+		
+				<br/><br/>
+		
+				<form method="post" th:action="@{/custumer/payment/pay}">
+					<label for="numberCreditCard">Cartão de Crédito</label>
+					<br/>
+					<input id="numberCreditCard" type="text" name="numberCreditCard" onKeyPress="return isNumberKey(event);"/>
+					<br/><br>
+					<input type="submit" value="Enviar pedido"/>
+				</form>
+		
+				<br/><br/>
+			</div>
+	
+			<input type="button" value="Voltar" th:onClick="'location.href=\'' + @{/custumer/home} + '\';'"/>
+		</div>
+	</body>
+</html>

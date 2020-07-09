@@ -26,7 +26,7 @@ public class LoggedUser implements UserDetails {
 		} else if (this.user instanceof Restaurant) {
 			role = Role.RESTAURANT;
 		} else {
-			throw new IllegalStateException("O tipo de usu·rio n„o È v·lido.");
+			throw new IllegalStateException("O tipo de usu√°rio n√£o √© v√°lido.");
 		}
 
 		roles = List.of(new SimpleGrantedAuthority("ROLE_" + role));

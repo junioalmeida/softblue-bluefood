@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+	<body>
+		<div layout:fragment="content">
+			<div class="div-page-error">
+				<img th:src="@{/images/bf_erro.png}"/>
+				<br/><br/>
+				<div id="error-message">
+					<span>A página referênciada não foi encontrada.</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -2,10 +2,12 @@ package almeida.ferreira.junio.bluefood.domain.restaurant;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -22,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import almeida.ferreira.junio.bluefood.domain.user.User;
 import almeida.ferreira.junio.bluefood.infrastructure.web.validator.UploadConstraint;
 import almeida.ferreira.junio.bluefood.utils.FileType;
+import almeida.ferreira.junio.bluefood.utils.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,47 +39,65 @@ public class Restaurant extends User {
 
 	@Column(length = 14, nullable = false)
 	@NotBlank(message = "O CNPJ deve ser informado.")
-	@Digits(integer = 14, fraction = 0, message = "O formato do CNPJ n„o È v·lido.")
+	@Digits(integer = 14, fraction = 0, message = "O formato do CNPJ n√£o √© v√°lido.")
 	private String cnpj;
 
 	@Size(max = 80)
 	private String logotipo;
 
-	@UploadConstraint(acceptedFileTypes = {FileType.PNG}, message = "A imagem n„o est· em um formato v·lido.")
+	@UploadConstraint(acceptedFileTypes = { FileType.PNG }, message = "A imagem n√£o est√° em um formato v√°lido.")
 	private transient MultipartFile logotipoFile;
 
 	@Column(length = 80, nullable = false)
-	@NotNull(message = "A taxa b·sica de entrega deve ser informado.")
-	@Min(value = 0, message = "A taxa b·sica de entrega n„o pode ser negativa.")
-	@Max(value = 99, message = "A taxa b·sica de entrega deve ser menor que R$ 99,00.")
-	private BigDecimal baseDeliveryRate;
+	@NotNull(message = "A taxa b√°sica de entrega deve ser informado.")
+	@Min(value = 0, message = "A taxa b√°sica de entrega n√£o pode ser negativa.")
+	@Max(value = 99, message = "A taxa b√°sica de entrega deve ser menor que R$ 99,00.")
+	private BigDecimal deliveryRate;
 
 	@Column(length = 80, nullable = false)
 	@NotNull(message = "O tempo de entrega deve ser informado.")
-	@Min(value = 0, message = "O tempo de entrega n„o pode ser negativa.")
+	@Min(value = 0, message = "O tempo de entrega n√£o pode ser negativa.")
 	@Max(value = 120, message = "O tempo de entrega deve ser menor que 120 minutos.")
 	private Integer baseDeliveryTime;
 
-	@ManyToMany
-	@JoinTable(
-			name = "restaurant_has_category", 
-			joinColumns = @JoinColumn(name = "restaurant_id"), 
-			inverseJoinColumns = @JoinColumn(name = "category_id")
-	)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "restaurant_has_category", joinColumns = @JoinColumn(name = "restaurant_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	@Size(min = 1, message = "Ao menos uma categoria deve ser selecionada.")
 	@ToString.Exclude
 	private Set<RestaurantCategory> categories = new HashSet<>(0);
 
 	@OneToMany(mappedBy = "restaurant")
 	private Set<MenuItem> menuItens = new HashSet<>(0);
-	
+
+	public String getCategoriesAsString() {
+
+		Set<String> categoriesName = new LinkedHashSet<>();
+
+		for (RestaurantCategory category : categories) {
+			categoriesName.add(category.getName());
+		}
+
+		return StringUtils.concatenate(categoriesName, ", ");
+	}
+
+	public Integer calculateDeliveryTime(String cep) {
+
+		int sum = 0;
+
+		for (char c : cep.toCharArray()) {
+			sum += Character.getNumericValue(c);
+		}
+
+		sum /= 2;
+
+		return sum + baseDeliveryTime;
+	}
+
 	public void setLogotipoFileName() {
 		if (getId() == null) {
 			throw new IllegalStateException("O restaurante deve estar salvo no banco de dados.");
 		}
 
-		this.logotipo = String.format("%04d-logo.%s", 
-									getId(), 
-									FileType.of(logotipoFile.getContentType()));
+		this.logotipo = String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()));
 	}
 }

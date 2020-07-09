@@ -16,8 +16,15 @@
 		<header>
 			<div id="div-header">
 				<span class="element-aux-allign-image"></span>
-				<a th:href="@{/}">
+				<a th:href="${link} == null ? @{/} : ${link}">
 					<img th:src="@{/images/bf_logotipoSistema.png}" class="logotipo"/>
+				</a>
+			</div>
+			<div id="div-header-user" th:if="${#authentication.principal != 'anonymousUser'}">
+				<span th:text="'Olá, ' + ${#authentication.principal.user.name} + '!'"></span>
+				<br/>
+				<a th:if="${session.shoppingCart != null}"  th:href="@{/custumer/shopping-cart/}">
+					<img th:src="@{/images/bf_iconeCarrinho.png}" class="img-shopping-cart"/>
 				</a>
 			</div>
 		</header>

@@ -19,12 +19,15 @@ public class Custumer extends User {
 
 	@Column(length = 11, nullable = false)
 	@NotBlank(message = "O CPF deve ser informado.")
-	@Digits(integer = 11, fraction = 0, message = "O formato do CPF n„o È v·lido.")
+	@Digits(integer = 11, fraction = 0, message = "O formato do CPF n√£o √© v√°lido.")
 	private String cpf;
 	
 	@Column(length = 8, nullable = false)
 	@NotBlank(message = "O CEP deve ser preenchido.")
-	@Digits(integer = 8, fraction = 0, message = "O formato do CEP n„o È v·lido.")
+	@Digits(integer = 8, fraction = 0, message = "O formato do CEP n√£o √© v√°lido.")
 	private String cep;
 
+	public String getFormattedCep() {
+		return cep.substring(0, 5) + "-" + cep.substring(5);
+	}
 }

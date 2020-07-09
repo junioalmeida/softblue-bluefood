@@ -1,6 +1,7 @@
 package almeida.ferreira.junio.bluefood.application.test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 import almeida.ferreira.junio.bluefood.domain.custumer.Custumer;
 import almeida.ferreira.junio.bluefood.domain.custumer.CustumerRepository;
+import almeida.ferreira.junio.bluefood.domain.order.Order;
+import almeida.ferreira.junio.bluefood.domain.order.Order.Status;
+import almeida.ferreira.junio.bluefood.domain.order.OrderRepository;
 import almeida.ferreira.junio.bluefood.domain.restaurant.MenuItem;
 import almeida.ferreira.junio.bluefood.domain.restaurant.MenuItemRepository;
 import almeida.ferreira.junio.bluefood.domain.restaurant.Restaurant;
@@ -35,11 +39,25 @@ public class FillElementsForTesting {
 	@Autowired
 	private MenuItemRepository menuItemRepository;
 	
+	@Autowired
+	private OrderRepository orderRepository;
+	
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		custumer();
+		Custumer[] custumers = custumer();
 		Restaurant[] restaurants = restaurant();
 		itensCardapio(restaurants);
+		
+		Order o = new Order();
+		o.setDate(LocalDateTime.now());
+		o.setCustumer(custumers[0]);
+		o.setRestaurant(restaurants[0]);
+		o.setDeliveryRate(BigDecimal.valueOf(3.5));
+		o.setSubtotal(BigDecimal.valueOf(54));
+		o.setStatus(Status.ENTREGA);
+		o.setTotal(BigDecimal.valueOf(57.5));
+		o.setId(1);
+		orderRepository.save(o);
 	}
 	
 	private Custumer[] custumer() {
@@ -47,7 +65,7 @@ public class FillElementsForTesting {
 		List<Custumer> custumers = new ArrayList<>(); 
 		
 		Custumer c = new Custumer();
-		c.setName("Jo„o Silva");
+		c.setName("Jo√£o Silva");
 		c.setEmail("joao@bluefood.com.br");
 		c.setPassword(StringUtils.encrypt("c"));
 		c.setCep("89300100");
@@ -84,7 +102,7 @@ public class FillElementsForTesting {
 		r.setEmail("r1@bluefood.com.br");
 		r.setPassword(StringUtils.encrypt("r"));
 		r.setCnpj("00000000000101");
-		r.setBaseDeliveryRate(BigDecimal.valueOf(3.2));
+		r.setDeliveryRate(BigDecimal.valueOf(3.2));
 		r.setPhone("99876671010");
 		r.getCategories().add(categoriaSanduiche);
 		r.getCategories().add(categoriaSobremesa);
@@ -98,7 +116,7 @@ public class FillElementsForTesting {
 		r.setEmail("r2@bluefood.com.br");
 		r.setPassword(StringUtils.encrypt("r"));
 		r.setCnpj("00000000000102");
-		r.setBaseDeliveryRate(BigDecimal.valueOf(4.5));
+		r.setDeliveryRate(BigDecimal.valueOf(4.5));
 		r.setPhone("99876671011");
 		r.getCategories().add(categoriaSanduiche);
 		r.getCategories().add(categoriaSobremesa);
@@ -112,7 +130,7 @@ public class FillElementsForTesting {
 		r.setEmail("r3@bluefood.com.br");
 		r.setPassword(StringUtils.encrypt("r"));
 		r.setCnpj("00000000000103");
-		r.setBaseDeliveryRate(BigDecimal.valueOf(12.2));
+		r.setDeliveryRate(BigDecimal.valueOf(12.2));
 		r.setPhone("99876671012");
 		r.getCategories().add(categoriaSanduiche);
 		r.getCategories().add(categoriaSobremesa);
@@ -126,7 +144,7 @@ public class FillElementsForTesting {
 		r.setEmail("r4@bluefood.com.br");
 		r.setPassword(StringUtils.encrypt("r"));
 		r.setCnpj("00000000000104");
-		r.setBaseDeliveryRate(BigDecimal.valueOf(9.8));
+		r.setDeliveryRate(BigDecimal.valueOf(9.8));
 		r.setPhone("99876671013");
 		r.getCategories().add(categoriaPizza);
 		r.getCategories().add(categoriaSobremesa);
@@ -140,7 +158,7 @@ public class FillElementsForTesting {
 		r.setEmail("r5@bluefood.com.br");
 		r.setPassword(StringUtils.encrypt("r"));
 		r.setCnpj("00000000000105");
-		r.setBaseDeliveryRate(BigDecimal.valueOf(14.9));
+		r.setDeliveryRate(BigDecimal.valueOf(14.9));
 		r.setPhone("99876671014");
 		r.getCategories().add(categoriaJapones);
 		r.getCategories().add(categoriaSobremesa);
@@ -155,8 +173,8 @@ public class FillElementsForTesting {
 	
 	private void itensCardapio(Restaurant[] restaurants) {
 		MenuItem ic = new MenuItem();
-		ic.setCategory("SanduÌche");
-		ic.setDescription("Delicioso sanduÌche com molho");
+		ic.setCategory("Sandu√≠che");
+		ic.setDescription("Delicioso sandu√≠che com molho");
 		ic.setName("Double Cheese Burger Special");
 		ic.setPrice(BigDecimal.valueOf(23.8));
 		ic.setRestaurant(restaurants[0]);
@@ -165,8 +183,8 @@ public class FillElementsForTesting {
 		menuItemRepository.save(ic);
 		
 		ic = new MenuItem();
-		ic.setCategory("SanduÌche");
-		ic.setDescription("SanduÌche padr„o que mata a fome");
+		ic.setCategory("Sandu√≠che");
+		ic.setDescription("Sandu√≠che padr√£o que mata a fome");
 		ic.setName("Cheese Burger Simples");
 		ic.setPrice(BigDecimal.valueOf(17.8));
 		ic.setRestaurant(restaurants[0]);
@@ -175,9 +193,9 @@ public class FillElementsForTesting {
 		menuItemRepository.save(ic);
 		
 		ic = new MenuItem();
-		ic.setCategory("SanduÌche");
-		ic.setDescription("SanduÌche natural com peito de peru");
-		ic.setName("SanduÌche Natural da Casa");
+		ic.setCategory("Sandu√≠che");
+		ic.setDescription("Sandu√≠che natural com peito de peru");
+		ic.setName("Sandu√≠che Natural da Casa");
 		ic.setPrice(BigDecimal.valueOf(11.8));
 		ic.setRestaurant(restaurants[0]);
 		ic.setSpotlight(false);
@@ -186,7 +204,7 @@ public class FillElementsForTesting {
 		
 		ic = new MenuItem();
 		ic.setCategory("Bebida");
-		ic.setDescription("Refrigerante com g·s");
+		ic.setDescription("Refrigerante com g√°s");
 		ic.setName("Refrigerante Tradicional");
 		ic.setPrice(BigDecimal.valueOf(9));
 		ic.setRestaurant(restaurants[0]);

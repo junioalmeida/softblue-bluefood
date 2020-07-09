@@ -39,7 +39,7 @@ public class MenuItem {
 	@Size(max = 50)
 	private String name;
 	
-	@NotBlank(message = "A descriÁ„o do item deve ser informada.")
+	@NotBlank(message = "A descri√ß√£o do item deve ser informada.")
 	@Size(max = 50)
 	private String description;
 	
@@ -50,14 +50,14 @@ public class MenuItem {
 	@Size(max = 50)
 	private String category;
 	
-	@NotNull(message = "O preÁo do item deve ser informado.")
+	@NotNull(message = "O pre√ßo do item deve ser informado.")
 	@Min(0)
 	private BigDecimal price;
 	
 	@NotNull
 	private Boolean spotlight;
 	
-	@UploadConstraint(acceptedFileTypes = FileType.PNG, message = "O tipo de imagem n„o È v·lido.")
+	@UploadConstraint(acceptedFileTypes = FileType.PNG, message = "O formato de imagem n√£o √© v√°lido.")
 	private transient MultipartFile imageFile;
 	
 	@NotNull
@@ -74,6 +74,6 @@ public class MenuItem {
 		
 		this.image = String.format("%04d-food.%s", 
 							getId(), 
-							FileType.of(imageFile.getContentType()));
+							FileType.of(imageFile.getContentType()).toString().toLowerCase());
 	}
 }

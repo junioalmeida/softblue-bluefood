@@ -14,7 +14,7 @@ public class ControllerHelper {
 		model.addAttribute("isEditMode", isEdit);
 	}
 	
-	public static void addCategoriesToRegistry(RestaurantCategoryRepository repository, Model model) {
+	public static void addCategoriesToRequest(RestaurantCategoryRepository repository, Model model) {
 		List<RestaurantCategory> categories = repository.findAll(Sort.by("name"));
 		model.addAttribute("categories", categories);	
 	}

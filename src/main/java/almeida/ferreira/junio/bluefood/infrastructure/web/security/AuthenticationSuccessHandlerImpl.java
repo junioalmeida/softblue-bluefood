@@ -22,7 +22,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		} else if (loggedUser.getRole() == Role.RESTAURANT) {
 			response.sendRedirect("restaurant/home");
 		} else {
-			throw new IllegalStateException("O tipo de usu·rio n„o È v·lido.");
+			throw new IllegalStateException("O tipo de usu√°rio n√£o √© v√°lido.");
 		}
 
 	}

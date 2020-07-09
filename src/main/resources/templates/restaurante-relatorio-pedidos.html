@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurant/home}">
+
+	<body>
+		<div layout:fragment="content">
+
+			<div>
+				<h1>Relatório de Pedidos</h1>
+			</div>
+	
+			<div>
+				<form method="GET" th:object="${orderFilter}" th:action="@{/restaurant/reports/orders}">
+					<fieldset>
+						<legend>Filtros</legend>
+	
+						<label for="id">Número:</label>
+						<br/><input type="text" id="id" th:field="*{id}"/>
+	
+						<br/>
+	
+						<label for="startDate">Início:</label>
+						<br/><input type="date" id="startDate" th:field="*{startDate}"/>
+	
+						<br/>
+						
+						<label for="endDate">Fim:</label>
+						<br/><input type="date" id="endDate" th:field="*{endDate}"/>
+	
+						<br/>
+						
+						<input type="submit" value="Buscar"/>
+					</fieldset>
+				</form>
+			</div>
+	
+			<br/><br/>
+			
+			<div id="error-message" th:if="${orders.size() == 0}">
+				<span>Não foi encontrado nenhum resultado.</span>
+			</div>
+		
+			<table th:if="${orders.size() > 0}">
+				<tr>
+					<th>Pedido</th>
+					<th>Nome</th>
+					<th>CEP</th>
+					<th>Valor</th>
+					<th>Data</th>
+				</tr>
+
+				<tr th:each="order : ${orders}">
+					<td><input type="button" th:value="${order}" th:onClick="'location.href=\'' + @{/restaurant/order/view} + '?orderId=' + ${order.id} + '\';'"/></td>
+					<td th:text="${order.custumer.name}">Samuel</td>
+					<td th:text="${order.custumer.cep}"></td>
+					<td th:text="${#numbers.formatCurrency(order.total)}"></td>
+					<td th:text="${#temporals.format(order.date, 'dd/MM/yyyy HH:mm')}"></td>
+				</tr>
+			</table>
+	
+			<br/><br/>
+	
+			<input type="button" value="Voltar" th:onClick="'location.href=\'' + @{/restaurant/home} + '\';'"/>
+		</div>
+	</body>
+</html>

@@ -19,7 +19,7 @@ import almeida.ferreira.junio.bluefood.utils.FileType;
 @Constraint(validatedBy = UploadValidator.class)
 public @interface UploadConstraint {
 	
-	String message() default "Arquivo inv·lido";
+	String message() default "Arquivo inv√°lido";
 	FileType[] acceptedFileTypes();
 	
 	Class<?>[] groups() default {};

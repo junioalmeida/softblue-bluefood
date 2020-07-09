@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurant/home}">
+
+	<body>
+		<div layout:fragment="content">
+			<div>
+				<h1>Configurações</h1>
+			</div>
+	
+			<div>
+				<input type="button" value="Dados básicos" th:onClick="'location.href=\'' + @{/restaurant/edit} + '\';'"/>
+				<br/><input type="button" value="Comidas" th:onClick="'location.href=\'' + @{/restaurant/foods/} + '\';'"/>
+				<br/><input type="button" value="Relatório de Pedidos" th:onClick="'location.href=\'' + @{/restaurant/reports/orders} + '\';'"/>
+				<br/><input type="button" value="Relatório de Itens" th:onClick="'location.href=\'' + @{/restaurant/reports/itens} + '\';'"/>
+				<br/><input type="button" value="Sair" th:onClick="'location.href=\'' + @{/logout} + '\';'"/>
+			</div>
+	
+			<div>
+				<h1>Pedidos em andamento</h1>
+			</div>
+	
+			<span th:if="${orders.size() == 0}">Não existe nenhum pedido anterior.</span>
+			
+			<div th:if="${orders.size() > 0}">
+				<th:block th:each="order : ${orders}">
+					<input type="button" th:value="${order}" th:onClick="'location.href=\'' + @{/restaurant/order/view} + '?orderId=' + ${order.id} +'\';'"/>
+					<br/>
+				</th:block>
+			</div>
+		</div>
+	</body>
+</html>

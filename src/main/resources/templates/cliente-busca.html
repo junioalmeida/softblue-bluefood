@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/custumer/home}">
+
+	<body>
+		<div layout:fragment="content">
+			<form method="GET" id="searchForm" th:object="${searchFilter}" th:action="@{/custumer/search}">
+				
+				<input type="hidden" id="searchType" th:field="*{searchType}"/>	
+				<input type="hidden" id="categoryId" th:field="*{categoryId}"/>	
+			
+				<div>
+					<h1>É hora de rangar!</h1>
+					<fieldset>
+						<input type="text" name="search" placeholder="Buscar por..." th:field="*{text}"/>
+						<input type="button" value="Procurar" onClick="submitTypeFilter(null)"/>
+					</fieldset>
+				</div>
+				
+				<br/><br/>
+		
+				<div id="div-food-categories">
+					<div th:each="category : ${categories}">
+						<a href="#" th:onClick="'submitTypeFilter(' + ${category.id} + ');'">
+							<img th:src="@{/images/category/} + ${category.image}"/>
+							<br/><span th:text="${category.name}"></span> 
+						</a>
+					</div>
+				</div>
+			
+				<div id="div-filter">
+					<h1>Resultados</h1>
+					<fieldset>
+						<legend>Filtros</legend>
+						
+						<input type="hidden" id="freeDelivery" th:field="*{freeDelivery}"/>
+						<input type="hidden" id="order" th:field="*{order}"/>
+						<input type="hidden" id="asc" th:field="*{asc}">
+						<input type="hidden" id="cmd" name="cmd"/>
+						
+						<input type="button" value="Entrega grátis" th:classappend="*{freeDelivery} ? 'filter-selected' : ''" onClick="setCommand('FREE_DELIVERY');"/>
+						<br/>
+						<input type="button" value="Maior taxa" th:classappend="*{order.name()} == 'RATE' and !*{asc} ? 'filter-selected' : ''" onClick="setCommand('WORST_RATE');"/> 
+						<input type="button" value="Menor taxa" th:classappend="*{order.name()} == 'RATE' and *{asc} ? 'filter-selected' : ''" onClick="setCommand('BEST_RATE');"/> 
+						<br/>
+						<input type="button" value="Maior tempo" th:classappend="*{order.name()} == 'TIME' and !*{asc} ? 'filter-selected' : ''" onClick="setCommand('WORST_TIME');"/> 
+						<input type="button" value="Menor tempo" th:classappend="*{order.name()} == 'TIME' and *{asc} ? 'filter-selected' : ''" onClick="setCommand('BEST_TIME');"/>
+					</fieldset>
+				</div>
+			</form>
+			
+			<br/><br/>
+	
+			<div>
+				<div id="div-option-restaurant" th:each="restaurant : ${restaurants}">
+					<a th:href="@{/custumer/restaurant} + '?restaurantId=' + ${restaurant.id}">
+						<img th:src="@{/images/logotipo/} + ${restaurant.logotipo}"/>
+						<br/><span class="text-bold-upper" th:text="${restaurant.name}"></span>
+						<br/><span th:text="${restaurant.CategoriesAsString}"></span>
+						<br/><span th:text="'Tempo médio de entrega: ' + ${restaurant.calculateDeliveryTime(cep)} + 'm'"></span>
+						<br/><span th:text="'Taxa de entrega: ' + ${#numbers.formatCurrency(restaurant.deliveryRate)}"></span>
+					</a>
+					<br/><br/>
+				</div>
+				
+				<span th:if="${msg} != null" th:text="${msg}"></span>
+			</div>
+			
+			<br/><br/>
+	
+			<input type="button" value="Voltar" th:onClick="'location.href=\'' + @{/custumer/home} + '\';'"/>
+		</div>
+	</body>
+</html>

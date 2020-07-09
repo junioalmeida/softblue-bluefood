@@ -71,7 +71,7 @@
 								</div>
 							</div>
 							
-							<input type="hidden" value="*" th:if="${isEditMode}"/>
+							<input type="hidden" value="*" name="password" th:if="${isEditMode}"/>
 	
 							<input type="submit" th:value="${!isEditMode} ? Cadastrar : Alterar"/>
 						</fieldset>

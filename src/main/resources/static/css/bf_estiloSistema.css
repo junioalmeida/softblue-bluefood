@@ -96,7 +96,7 @@ textarea {
 	margin-bottom: 6px;
 }
 
-input {
+input, #amount, #id{
 	height: 35px;
 }
 
@@ -134,11 +134,20 @@ input[type=submit] {
 }
 
 input[type=button]:hover,
-input[type=submit]:hover {
+input[type=submit]:hover,
+input[disable=true] {
 
 	background-color: #69c5ee;
 	border-color: #1e9bde;
 	cursor: pointer;
+}
+
+input[disable=true] {
+	cursor: initial;
+}
+
+.button-remove {
+	margin-top: 10px;
 }
 
 label {
@@ -161,6 +170,10 @@ th {
 	padding: 3px;
 }
 
+tr {
+	height: 30px;
+}
+
 tr:nth-child(even) {
 	background-color: #cccccc;
 }
@@ -174,13 +187,18 @@ td {
 }
 
 #div-food-categories {
+	overflow: hidden;
 	display: flex;
-	margin-top: 20px;
-	margin-bottom: 20px;
+  	justify-content: space-between;
 }
 
 #div-food-categories div {
-	margin: auto;
+	float: left;
+	height: 130px;
+}
+
+#div-food-categories img {
+	height: 50%;
 }
 
 a:link,
@@ -197,7 +215,7 @@ a:hover {
 	height: 130px;
 }
 
-.restaurant-name {
+.text-bold-upper {
 	font-weight: bold;
 	text-transform: uppercase;
 }
@@ -208,10 +226,14 @@ a:hover {
 }
 
 .img-restaurant-order {
-	height: 300px; 
+	height: 180px; 
 }
 
 #div-highlights-option img,
 #div-menu-option img {
-	height:  250px;
+	height: 130px;
+}
+
+.div-page-error {
+	text-align: center;
 }

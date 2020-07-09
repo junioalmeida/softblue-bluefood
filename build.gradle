@@ -6,7 +6,7 @@ plugins {
 
 group = 'almeida.ferreira.junio.bluefood'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '14'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -25,6 +25,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	runtimeOnly 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	runtimeOnly 'org.thymeleaf.extras:thymeleaf-extras-java8time'
 	runtimeOnly 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'

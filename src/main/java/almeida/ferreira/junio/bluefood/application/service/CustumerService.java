@@ -22,7 +22,7 @@ public class CustumerService{
 	public void save(Custumer custumer) throws ValidationException{
 		
 		if(!validateEmail(custumer.getEmail(), custumer.getId())) {
-			throw new ValidationException("O email informado j· est· sendo utilizado.");
+			throw new ValidationException("O email informado j√° est√° sendo utilizado.");
 		}
 		
 		if(custumer.getId() != null) {

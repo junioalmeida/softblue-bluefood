@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurant/home}">
+
+	<body>
+		<div layout:fragment="content">
+
+			<div>
+				<h1>Relatório de Itens</h1>
+			</div>
+	
+			<div>
+				<form method="GET" th:object="${orderFilter}" th:action="@{/restaurant/reports/itens}">
+					<fieldset>
+						<legend>Filtros</legend>
+	
+						<label for="id">Item:</label>
+						<br/>
+						<select id="id" th:field="*{id}">
+							<option value="0">Todos...</option>
+							<option th:each="item : ${itens}" th:value="${item.id}" th:text="${item.name}"></option>
+						</select>
+	
+						<br/>
+	
+						<label for="startDate">Início:</label>
+						<br/><input type="date" id="startDate" th:field="*{startDate}"/>
+	
+						<br/>
+						
+						<label for="endDate">Fim:</label>
+						<br/><input type="date" id="endDate" th:field="*{endDate}"/>
+	
+						<br/>
+						
+						<input type="submit" value="Buscar"/>
+					</fieldset>
+				</form>
+			</div>
+	
+			<br/><br/>
+			
+			<div id="error-message" th:if="${reportItens.size() == 0}">
+				<span>Não foi encontrado nenhum resultado.</span>
+			</div>
+	
+			<table th:if="${reportItens.size() > 0}">
+				<tr>
+					<th>Item</th>
+					<th>Quantidade</th>
+					<th>Faturamento</th>
+				</tr>
+
+				<tr th:each="item : ${reportItens}">
+					<td th:text="${item.name}"></td>
+					<td th:text="${item.amount}">25</td>
+					<td th:text="${#numbers.formatCurrency(item.total)}"></td>
+				</tr>
+			</table>
+	
+			<br/><br/>
+	
+			<input type="button" value="Voltar" th:onClick="'location.href=\'' + @{/restaurant/home} + '\';'"/>
+		</div>
+	</body>
+</html>

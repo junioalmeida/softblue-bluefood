@@ -23,13 +23,13 @@ import almeida.ferreira.junio.bluefood.domain.restaurant.RestaurantCategoryRepos
 public class PublicController {
 	
 	@Autowired
-	CustumerService custumerService;
+	private CustumerService custumerService;
 	
 	@Autowired
-	RestaurantService restaurantService;
+	private RestaurantService restaurantService;
 	
 	@Autowired
-	RestaurantCategoryRepository categoryRepository;
+	private RestaurantCategoryRepository categoryRepository;
 	
 	@GetMapping(path = "/custumer/new")
 	public String newCustumer(Model model) {
@@ -65,7 +65,7 @@ public class PublicController {
 		model.addAttribute("restaurant", new Restaurant());
 		
 		ControllerHelper.saveEditMode(model, false);
-		ControllerHelper.addCategoriesToRegistry(categoryRepository, model);
+		ControllerHelper.addCategoriesToRequest(categoryRepository, model);
 		
 		return "restaurante-cadastro";
 	}
@@ -78,7 +78,7 @@ public class PublicController {
 		
 		if(!errors.hasErrors()) {
 			try {
-				restaurantService.save(restaurant);
+				restaurantService.saveRestaurant(restaurant);
 				model.addAttribute("msg", "Restaurante cadastrado com sucesso!");
 			} catch (ValidationException e) {
 				errors.rejectValue("email", null, e.getMessage());
@@ -86,7 +86,7 @@ public class PublicController {
 		}
 		
 		ControllerHelper.saveEditMode(model, false);
-		ControllerHelper.addCategoriesToRegistry(categoryRepository, model);
+		ControllerHelper.addCategoriesToRequest(categoryRepository, model);
 		
 		return "restaurante-cadastro";
 	}

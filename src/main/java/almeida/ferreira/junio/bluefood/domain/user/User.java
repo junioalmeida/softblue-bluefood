@@ -31,23 +31,23 @@ public class User implements Serializable {
 	
 	@Column(length = 80, nullable = false)
 	@NotBlank(message = "O nome deve ser preenchido.")
-	@Size(max = 80, message = "O nome È muito grande.")
+	@Size(max = 80, message = "O nome √© muito grande.")
 	private String name;
 	
 	@Column(length = 60, nullable = false)
 	@NotBlank(message = "O email deve ser preenchido.")
-	@Email(message = "O formato do e-mail n„o È v·lido.")
-	@Size(max = 60, message = "O email È muito grande.")
+	@Email(message = "O formato do e-mail n√£o √© v√°lido.")
+	@Size(max = 60, message = "O email √© muito grande.")
 	private String email;
 	
 	@Column(length = 11, nullable = false)
 	@NotBlank(message = "O telefone deve ser preenchido.")
-	@Digits(integer = 11, fraction = 0, message = "O formato do telefone n„o È v·lido.")
+	@Digits(integer = 11, fraction = 0, message = "O formato do telefone n√£o √© v√°lido.")
 	private String phone;
 	
 	@Column(length = 80, nullable = false)
 	@NotBlank(message = "A senha deve ser preenchida.")
-	@Size(max = 80, message = "A senha È muito grande.")
+	@Size(max = 80, message = "A senha √© muito grande.")
 	private String password;
 	
 	public void encryptPassword() {
