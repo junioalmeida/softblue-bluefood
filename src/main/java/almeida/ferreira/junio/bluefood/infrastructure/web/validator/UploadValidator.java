@@ -16,7 +16,7 @@ public class UploadValidator implements ConstraintValidator<UploadConstraint, Mu
 	
 	@Override
 	public void initialize(UploadConstraint constraintAnnotation) {
-		acceptedFiles = Arrays.asList( constraintAnnotation.acceptedFileTypes());
+		acceptedFiles = Arrays.asList(constraintAnnotation.acceptedFileTypes());
 	}
 	
 	@Override

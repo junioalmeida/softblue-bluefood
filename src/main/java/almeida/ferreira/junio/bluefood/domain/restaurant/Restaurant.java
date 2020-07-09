@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -57,11 +58,18 @@ public class Restaurant extends User {
 	private Integer baseDeliveryTime;
 
 	@ManyToMany
-	@JoinTable(name = "restaurant_has_category", joinColumns = @JoinColumn(name = "restaurant_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	@JoinTable(
+			name = "restaurant_has_category", 
+			joinColumns = @JoinColumn(name = "restaurant_id"), 
+			inverseJoinColumns = @JoinColumn(name = "category_id")
+	)
 	@Size(min = 1, message = "Ao menos uma categoria deve ser selecionada.")
 	@ToString.Exclude
 	private Set<RestaurantCategory> categories = new HashSet<>(0);
 
+	@OneToMany(mappedBy = "restaurant")
+	private Set<MenuItem> menuItens = new HashSet<>(0);
+	
 	public void setLogotipoFileName() {
 		if (getId() == null) {
 			throw new IllegalStateException("O restaurante deve estar salvo no banco de dados.");
